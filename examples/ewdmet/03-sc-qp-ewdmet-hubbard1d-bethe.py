@@ -8,7 +8,7 @@ from dyson import Lehmann, FCI, CCSD
 u = 3
 nsite = 128
 nelec = nsite
-nfrag = 2
+nfrag = 1
 nmom_max_bath = 1
 nmom_max_fci = (4,4)
 solv = 'FCI'
@@ -22,7 +22,7 @@ gf_hf = Lehmann(mf.mo_energy, np.eye(mf.mo_coeff.shape[0]), chempot=chempot)
 
 
 emb = vayesta.ewf.EWF(mf, solver=solv, bath_options=dict(bathtype='ewdmet', max_order=nmom_max_bath, order=nmom_max_bath, dmet_threshold=1e-12), solver_options=dict(conv_tol=1e-12, n_moments=nmom_max_fci))
-emb.qpewdmet_scmf(proj=2, maxiter=10)
+emb.qpewdmet_scmf(proj=1, maxiter=10)
 nimages = [nsite//nfrag, 1, 1]
 emb.symmetry.set_translations(nimages)
 with emb.site_fragmentation() as f:
